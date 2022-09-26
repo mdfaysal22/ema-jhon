@@ -1,0 +1,8 @@
+.shop{
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+}
+.shop-container{
+    width: 85%;
+    margin: 0 auto;
+}
