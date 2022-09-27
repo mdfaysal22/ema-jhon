@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import AsideCart from '../AsideCart/AsideCart';
 import Card from '../Card/Card';
+import { addToDb, getAddedCart } from '../utilities/fakedb';
 import './Shop.css';
 
 const Shop = () => {
@@ -16,10 +17,35 @@ const Shop = () => {
     const [cart, setcart] = useState([])
 
     const addToCart = (product) => {
-        const newCart = [...cart, product];
+        let newCart = [];
+        const exists = cart.find(existsProduct => existsProduct.id === product.id);
+        if(!exists){
+            product.quantity = 1;
+            newCart = [...cart, product];
+
+        }else{
+            const restCart = cart.filter(restCart => restCart.id !== product.id);
+            exists.quantity = exists.quantity + 1;
+            newCart = [...restCart , exists];
+        }
         setcart(newCart);
+        addToDb(product.id);
     }
-    console.log(addToCart);
+    
+    useEffect( () => {
+        const getAdderCarts = getAddedCart();
+        const savedCarts = new Array();
+        for(const id in getAdderCarts){
+            const addedProduct = data.find(singleData => singleData.id === id);
+            if(addedProduct){
+                const quantity = getAdderCarts[id];
+                addedProduct.quantity = quantity;
+                savedCarts.push(addedProduct);
+            }
+        }
+        setcart(savedCarts);
+    },[data])
+
     return (
         <section>
            <div className="shop">
