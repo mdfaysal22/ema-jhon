@@ -34,7 +34,7 @@ const Shop = () => {
     
     useEffect( () => {
         const getAdderCarts = getAddedCart();
-        const savedCarts = new Array();
+        const savedCarts = [];
         for(const id in getAdderCarts){
             const addedProduct = data.find(singleData => singleData.id === id);
             if(addedProduct){
