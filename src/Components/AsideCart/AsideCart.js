@@ -1,9 +1,9 @@
-import { faArrowRight, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import './AsideCart.css';
 const AsideCart = (props) => {
-    const {cart} = props;
+    const {cart, clearCart, children} = props;
     let total = 0;
     let totalShipping = 0;
     let quantity = 0;
@@ -28,14 +28,12 @@ const AsideCart = (props) => {
 
                     {/* Button For Remove and Review Shopping */}
                     <div className='grid grid-flow-row mx-auto w-11/12'>
-                    <button className='btn w-full rounded-none bg-red-500 border-0 hover:bg-red-600 my-4'>
+                    <button onClick={clearCart} className='btn w-full rounded-none bg-red-500 border-0 hover:bg-red-600 my-4'>
                         <span className='mr-2'>Clear Cart</span>
                         <FontAwesomeIcon icon = {faTrash}></FontAwesomeIcon>    
                     </button>
-                    <button className='btn w-full rounded-none bg-yellow-500 border-0 hover:bg-yellow-600'>
-                        <span className="mr-2">Review Order</span>
-                        <FontAwesomeIcon icon= {faArrowRight}></FontAwesomeIcon>    
-                    </button>
+                    
+                    {children}
                     </div>
             </div>
         </div>

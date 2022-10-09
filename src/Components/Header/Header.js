@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import logo from '../images/Logo.svg';
 import './Header.css'
 const Header = () => {
@@ -9,11 +10,34 @@ const Header = () => {
                     <img src={logo} alt="" />
                 </div>
                 <div>
-                    <ul className='flex'>
-                        <li><a className='text-white mx-3 hover:text-amber-400 transition-all' href="">Order</a></li>
-                        <li><a className='text-white mx-3 hover:text-amber-400 transition-all' href="">Order Review</a></li>
-                        <li><a className='text-white mx-3 hover:text-amber-400 transition-all' href="">Manage Inventory</a></li>
-                        <li><a className='text-white mx-3 hover:text-amber-400 transition-all' href="">Login</a></li>
+                    <ul className='flex gap-3 text-white transition-all'>
+                        <li className='hover:text-yellow-300'><NavLink 
+                        className={({ isActive }) =>
+                        isActive ? "text-yellow-300" : undefined
+                      }
+                        to="/orders">Order</NavLink></li>
+
+
+                        <li className='hover:text-yellow-300'><NavLink 
+                        className={({ isActive }) =>
+                        isActive ? "text-yellow-300" : undefined
+                      }
+                        to="/review">Order Review</NavLink></li>
+
+
+                        <li className='hover:text-yellow-300'><NavLink 
+                        className={({ isActive }) =>
+                        isActive ? "text-yellow-300" : undefined
+                      }
+                        to="/inventory">Manage Inventory</NavLink></li>
+
+
+                        <li className='hover:text-yellow-300'><NavLink 
+                        className={({ isActive }) =>
+                        isActive ? "text-yellow-300" : undefined
+                      }
+                        to="/login">Login</NavLink></li>
+                        
                     </ul>
                 </div>
             </div>
