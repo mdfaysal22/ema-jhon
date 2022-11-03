@@ -4,18 +4,13 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import PrivateRouter from "../../PrivateRouter/PrivateRouter";
 import AsideCart from "../AsideCart/AsideCart";
 import Card from "../Card/Card";
 import { addToDb, deleteShoppingCart, getAddedCart } from "../utilities/fakedb";
 import "./Shop.css";
 
 const Shop = () => {
-  // const [data, setdata] = useState([]);
-  // useEffect( () => {
-  //     fetch('products.json')
-  //     .then(res => res.json())
-  //     .then(data => setdata(data));
-  // },[]);
 
   let data = useLoaderData();
   const [allData, setAllData] = useState(false);
@@ -43,25 +38,25 @@ const Shop = () => {
   const addToCart = (product) => {
     let newCart = [];
     const exists = cart.find(
-      (existsProduct) => existsProduct.id === product.id
+      (existsProduct) => existsProduct._id === product._id
     );
     if (!exists) {
       product.quantity = 1;
       newCart = [...cart, product];
     } else {
-      const restCart = cart.filter((restCart) => restCart.id !== product.id);
+      const restCart = cart.filter((restCart) => restCart._id !== product._id);
       exists.quantity = exists.quantity + 1;
       newCart = [...restCart, exists];
     }
     setcart(newCart);
-    addToDb(product.id);
+    addToDb(product._id);
   };
 
   useEffect(() => {
     const getAdderCarts = getAddedCart();
     const savedCarts = [];
     for (const id in getAdderCarts) {
-      const addedProduct = data.find((singleData) => singleData.id === id);
+      const addedProduct = data.find((singleData) => singleData._id === id);
       if (addedProduct) {
         const quantity = getAdderCarts[id];
         addedProduct.quantity = quantity;
@@ -78,7 +73,7 @@ const Shop = () => {
           <div className="grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 gap-4 my-8">
             {data.map((products) => (
               <Card
-                key={products.id}
+                key={products._id}
                 addToCart={addToCart}
                 product={products}
               ></Card>

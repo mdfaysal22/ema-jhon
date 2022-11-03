@@ -16,7 +16,7 @@ const AddedCart = ({cart, handleRemoveItem}) => {
                     <p>Quantity: {cart.quantity}</p>
                 </div>
                 <div className='mr-10'>
-                    <button onClick={() => handleRemoveItem(cart.id)} className='bg-red-100 hover:bg-red-200 transition-all duration-500 flex items-center justify-center w-12 h-12 rounded-full'>
+                    <button onClick={() => handleRemoveItem(cart._id)} className='bg-red-100 hover:bg-red-200 transition-all duration-500 flex items-center justify-center w-12 h-12 rounded-full'>
                         <FontAwesomeIcon className='text-red-900'  icon={faTrash}></FontAwesomeIcon>
                     </button>
                 </div>

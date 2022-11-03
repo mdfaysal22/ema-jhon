@@ -8,7 +8,7 @@ import AddedCart from './AddedCart/AddedCart';
 
 
 const Review = () => {
-    const {products, previousCart} = useLoaderData();
+    const { previousCart} = useLoaderData();
     const [cart , setCart] = useState(previousCart);
     const clearCart = () => {
         setCart([]);
@@ -16,7 +16,7 @@ const Review = () => {
     }
 
     const handleRemoveItem = (id) => {
-        const remainingProduct = cart.filter(product => product.id !== id);
+        const remainingProduct = cart.filter(product => product._id !== id);
         setCart(remainingProduct);
         removeFromDb(id);
     }
@@ -25,7 +25,7 @@ const Review = () => {
         <div className='shop'>
             <div className='shop-container'>
                 {
-                    cart.map(product => <AddedCart cart = {product} handleRemoveItem = {handleRemoveItem} key={cart.id}></AddedCart>)
+                    cart.map(product => <AddedCart cart = {product} handleRemoveItem = {handleRemoveItem} key={cart._id}></AddedCart>)
                 }
                 {
                     cart.length === 0 && <div className='text-center bg-yellow-100 py-10 text-3xl my-6'>

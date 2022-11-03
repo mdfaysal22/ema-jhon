@@ -6,6 +6,9 @@ import Review from './Components/Review/Review';
 import Inventory from './Components/Inventory/Inventory';
 import Login from './Components/Login/Login';
 import { ProductAndCartLoader } from './ProductAndCartLoader/ProductAndCartLoader';
+import Signup from './Components/Signup/Signup';
+import PrivateRouter from './PrivateRouter/PrivateRouter';
+import Home from './Components/Home/Home';
 
 function App() {
   const router = createBrowserRouter([
@@ -15,15 +18,16 @@ function App() {
       children: [
         {
           path: '/',
-          loader: async() => {
-            return fetch('products.json')
-          },
-          element: <Shop></Shop>
+          element: <Home></Home>
+        },
+        {
+          path: '/home',
+          element: <Home></Home>
         },
         {
           path: '/orders',
           loader: async() => {
-            return fetch('products.json')
+            return fetch('http://localhost:5000/products')
           },
           element: <Shop></Shop>
 
@@ -31,21 +35,25 @@ function App() {
         {
           path:'/review',
           loader: ProductAndCartLoader,
-          element:<Review></Review>
+          element:<PrivateRouter><Review></Review></PrivateRouter>
         },
         {
           path:'/inventory',
-          element:<Inventory></Inventory>
+          element:<PrivateRouter><Inventory></Inventory></PrivateRouter>
         },
         {
           path: '/login',
           element:<Login></Login>
-        }
-      ]
-    },
-    {
+        },
+        {
+          path:'/signup',
+          element: <Signup></Signup>
+        },
+        {
       path: '/*',
       element: <h1>Not Found</h1>
+    }
+      ]
     }
   ])
   return (

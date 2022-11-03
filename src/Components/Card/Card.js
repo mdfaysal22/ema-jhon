@@ -1,6 +1,7 @@
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import PrivateRouter from '../../PrivateRouter/PrivateRouter';
 
 const Card = (props) => {
     const {name, seller, price, ratings, img} = props.product;
@@ -21,10 +22,12 @@ const Card = (props) => {
                     <p className='mt-4'>Manufacturer : <span>{seller}</span></p>
                     <p>Rating: <span>{ratings}</span></p>
                 </div>
+                <PrivateRouter>
                 <button onClick={() => {props.addToCart(props.product)}} className="btn rounded-none w-full bg-yellow-600 border-0 hover:bg-yellow-700">
                     <span className='mr-2'>Buy Now</span>
                     <FontAwesomeIcon icon = {faShoppingCart}></FontAwesomeIcon>
                 </button>
+                </PrivateRouter>
             </div>
     );
 };
